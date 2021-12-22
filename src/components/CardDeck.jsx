@@ -139,8 +139,11 @@ import deckImg from '../card-deck.png'
                     <Flex direction={'row'} align='center'>
                         {theRiver}
                         {
-                            drawnDeck.length < 5 &&
-                            <Button onClick={addCard} colorScheme={'green'}>Add</Button>
+                            drawnDeck.length < 5 && drawnDeck.length !== 0 ?
+                                <Button onClick={addCard} colorScheme={'green'}>Add</Button>
+                            :
+                                <>
+                                </>
                         }
                     </Flex>
                 </Box>
