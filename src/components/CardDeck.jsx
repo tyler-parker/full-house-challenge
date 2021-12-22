@@ -14,7 +14,6 @@ import deckImg from '../card-deck.png'
  function CardDeck(props) {
     const { deck_id, gameInit } = props
     const [ drawnDeck, setDrawnDeck ] = useState([])
-    const [ shuffleInit, setShuffleInit ] = useState(false)
     const [ remaining, setRemaining ] = useState()
     const [ cardCompare, setCardCompare ] = useState()
     const [pair, setPair] = useState([])
@@ -62,8 +61,6 @@ import deckImg from '../card-deck.png'
         await axios.get(`https://deckofcardsapi.com/api/deck/${deck_id}/draw/?count=5`)
             .then(res => setDrawnDeck(res.data.cards))
             .catch(err => console.error(err))
-
-        setShuffleInit(prevState => !prevState)
     }
 
     const deleteCard = (cardId) => {
@@ -96,13 +93,11 @@ import deckImg from '../card-deck.png'
             align='center' 
             p={2} 
             m={3} 
-            minH='35vh' 
-            w={'25vh'} 
             border='solid' 
             borderColor={borderColorLogic(card)} 
             borderRadius='25px'
         >
-            <Image src={card.image} />
+            <Image src={card.image} key={card.code} />
             <Button
                 size='sm' 
                 colorScheme={'red'} 
@@ -116,37 +111,42 @@ import deckImg from '../card-deck.png'
 
     return (
         <Box>
-            {   
-                gameInit &&
+                
                 <Box align={'center'}>
 
+                    <Image 
+                        src={deckImg} 
+                        w={{sm: '45vh'}}
+                    />
                     <Button 
-                        w={'50%'} 
+                        size={'lg'} 
                         h={'10%'} 
                         backgroundColor={'green.500'} 
                         as='button'
                         onClick={drawCards}
                     >
-                        <Heading color='white'>Draw 5</Heading>
+                        {
+                            gameInit &&
+                            <Heading color='white'>Draw 5</Heading>
+                        }
                     </Button>
-                    <Image 
-                        src={deckImg} 
-                        />
 
-                    <Heading>Cards remaining: {remaining}</Heading>
+                    <Heading mt={4}>Cards remaining: {remaining}</Heading>
                         <Heading>
                             {JSON.stringify(cardCompare)}
                         </Heading>
-                    <Flex direction={'row'} align='center'>
+                    <Flex direction={{sm: 'column', md: 'row', lg: 'row', xl: 'row'}} align='center'>
                         {theRiver}
                         {
-                            drawnDeck.length < 5 &&
-                            <Button onClick={addCard} colorScheme={'green'}>Add</Button>
+                            drawnDeck.length < 5 && drawnDeck.length !== 0 ?
+                                <Button onClick={addCard} colorScheme={'green'}>Add</Button>
+                            :
+                                <>
+                                </>
                         }
                     </Flex>
-
                 </Box>
-            }
+            
             {
                 pair.length !== 0 && triple.length !== 0 ?
                 'Full house!'
