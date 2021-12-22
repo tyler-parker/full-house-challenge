@@ -16,7 +16,8 @@ import deckImg from '../card-deck.png'
     const [ drawnDeck, setDrawnDeck ] = useState([])
     const [ shuffleInit, setShuffleInit ] = useState(false)
     const [ remaining, setRemaining ] = useState()
-    
+    const [ cardCompare, setCardCompare ] = useState()
+
     useEffect(() => {
         axios.get(`https://deckofcardsapi.com/api/deck/${deck_id}`)
             .then(res => setRemaining(res.data.remaining))
@@ -46,6 +47,8 @@ import deckImg from '../card-deck.png'
         }
 
         console.log(count)
+        setCardCompare(count)
+        console.log(result)
         return result
     }
 
@@ -55,14 +58,11 @@ import deckImg from '../card-deck.png'
             .catch(err => console.error(err))
 
         setShuffleInit(prevState => !prevState)
-        // console.log(drawnDeck);
-        // console.log(shuffleInit)
     }
 
     const deleteCard = (cardId) => {
         setDrawnDeck(prevState => prevState.filter(card => card.code !== cardId))
-        // console.log(drawnDeck)
-        // console.log(drawnDeck.length)
+        console.log(JSON.stringify(cardCompare))
     }
 
     const addCard = async () => {
@@ -71,8 +71,6 @@ import deckImg from '../card-deck.png'
             [...prevState, res.data.cards[0]]
         ))
         .catch(err => console.error(err))
-        // console.log(drawnDeck)
-        // console.log(deck_id)
     }
 
     const theRiver = drawnDeck.map(card => (
@@ -112,12 +110,16 @@ import deckImg from '../card-deck.png'
                         as='button'
                         onClick={drawCards}
                     >
-                        <Heading color='white'>Shuffle deck</Heading></Button>
+                        <Heading color='white'>Draw 5</Heading>
+                    </Button>
                     <Image 
                         src={deckImg} 
-                    />
+                        />
 
                     <Heading>Cards remaining: {remaining}</Heading>
+                        <Heading>
+                            {JSON.stringify(cardCompare)}
+                        </Heading>
                     <Flex direction={'row'} align='center'>
                         {theRiver}
                         {
