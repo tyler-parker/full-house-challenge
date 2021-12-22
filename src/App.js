@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios'
+import { ColorModeSwitcher } from './ColorModeSwitcher';
+import CardDeck from './components/CardDeck';
 import {
   ChakraProvider,
   Box,
@@ -11,7 +13,6 @@ import {
   theme,
   Button
 } from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
 
 function App() {
   const [ deck, setDeck ] = useState()
@@ -33,13 +34,11 @@ function App() {
         <Grid minH="100vh" p={3}>
           <ColorModeSwitcher justifySelf="flex-end" />
           <VStack spacing={8}>
-            {/* Deck goes here */}
-            <Grid templateColumns='repeat(1fr, 5)'>
-              {/* dealt cards go here */}
-            </Grid>
+            <CardDeck remaining={gameInit && deck.remaining} gameInit={gameInit} deck_id={gameInit && deck.deck_id} />
+
             {
               // !gameInit ?
-                <Button onClick={getDeck}>Shuffle Deck</Button>
+                <Button onClick={getDeck}>{gameInit ? 'Restart Game' : 'Start Game' }</Button>
               // : <></>
             }
           </VStack>
