@@ -6,7 +6,8 @@ import {
     Grid,
     Image,
     Flex,
-    Button
+    Button,
+    Text
 } from '@chakra-ui/react'
 import deckImg from '../card-deck.png'
 
@@ -15,13 +16,38 @@ import deckImg from '../card-deck.png'
     const [ drawnDeck, setDrawnDeck ] = useState([])
     const [ shuffleInit, setShuffleInit ] = useState(false)
     const [ remaining, setRemaining ] = useState()
-    const cardCount = [1,2,3,4,5]
-
+    
     useEffect(() => {
         axios.get(`https://deckofcardsapi.com/api/deck/${deck_id}`)
             .then(res => setRemaining(res.data.remaining))
             .catch(err => console.error(err))
     }, [drawnDeck])
+
+    useEffect(() => {
+        compareCards()
+    }, [drawnDeck])
+    
+    const compareCards = () => {
+        const count = {}
+        const result = []
+
+        drawnDeck.forEach(el => {
+            if (count[el.value]) {
+                count[el.value] += 1
+                return
+            } 
+            count[el.value] = 1
+        })
+
+        for (let prop in count) {
+            if (count[prop] >= 2) {
+                result.push(prop)
+            }
+        }
+
+        console.log(count)
+        return result
+    }
 
     const drawCards = async () => {
         await axios.get(`https://deckofcardsapi.com/api/deck/${deck_id}/draw/?count=5`)
@@ -29,14 +55,14 @@ import deckImg from '../card-deck.png'
             .catch(err => console.error(err))
 
         setShuffleInit(prevState => !prevState)
-        console.log(drawnDeck);
-        console.log(shuffleInit)
+        // console.log(drawnDeck);
+        // console.log(shuffleInit)
     }
 
     const deleteCard = (cardId) => {
         setDrawnDeck(prevState => prevState.filter(card => card.code !== cardId))
-        console.log(drawnDeck)
-        console.log(drawnDeck.length)
+        // console.log(drawnDeck)
+        // console.log(drawnDeck.length)
     }
 
     const addCard = async () => {
@@ -45,20 +71,30 @@ import deckImg from '../card-deck.png'
             [...prevState, res.data.cards[0]]
         ))
         .catch(err => console.error(err))
-        console.log(drawnDeck)
-        console.log(deck_id)
+        // console.log(drawnDeck)
+        // console.log(deck_id)
     }
 
     const theRiver = drawnDeck.map(card => (
-        <Box justify='center' align='center' p={2} m={3} minH='35vh' w={'25vh'} border='solid' borderColor='gray.500' borderRadius='25px'>
+        <Box 
+            justify='center' 
+            align='center' 
+            p={2} 
+            m={3} 
+            minH='35vh' 
+            w={'25vh'} 
+            border='solid' 
+            borderColor='gray.500' 
+            borderRadius='25px'
+        >
             <Image src={card.image} />
-            <Button 
+            <Button
                 size='sm' 
                 colorScheme={'red'} 
                 mt={2}
                 onClick={() => deleteCard(card.code)}
             >
-                Remove
+                    Remove
             </Button>
         </Box>
     ))
@@ -76,7 +112,7 @@ import deckImg from '../card-deck.png'
                         as='button'
                         onClick={drawCards}
                     >
-                        <Heading>Shuffle deck</Heading></Button>
+                        <Heading color='white'>Shuffle deck</Heading></Button>
                     <Image 
                         src={deckImg} 
                     />
