@@ -93,8 +93,6 @@ import deckImg from '../card-deck.png'
             align='center' 
             p={2} 
             m={3} 
-            minH='35vh' 
-            w={'25vh'} 
             border='solid' 
             borderColor={borderColorLogic(card)} 
             borderRadius='25px'
@@ -118,9 +116,10 @@ import deckImg from '../card-deck.png'
 
                     <Image 
                         src={deckImg} 
-                        />
+                        w={{sm: '45vh'}}
+                    />
                     <Button 
-                        w={'400px'} 
+                        size={'lg'} 
                         h={'10%'} 
                         backgroundColor={'green.500'} 
                         as='button'
@@ -136,7 +135,7 @@ import deckImg from '../card-deck.png'
                         <Heading>
                             {JSON.stringify(cardCompare)}
                         </Heading>
-                    <Flex direction={'row'} align='center'>
+                    <Flex direction={{sm: 'column', md: 'row', lg: 'row', xl: 'row'}} align='center'>
                         {theRiver}
                         {
                             drawnDeck.length < 5 && drawnDeck.length !== 0 ?

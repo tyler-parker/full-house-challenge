@@ -42,6 +42,7 @@ function App() {
 
             <Button 
               onClick={getDeck}
+              m={6}
             >
               {gameInit ? 'Restart Game' : 'Start Game' }
             </Button>
