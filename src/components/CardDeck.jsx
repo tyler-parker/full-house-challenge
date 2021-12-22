@@ -3,7 +3,6 @@ import axios from 'axios'
 import {
     Box,
     Heading,
-    Grid,
     Image,
     Flex,
     Button,
@@ -16,16 +15,14 @@ import deckImg from '../card-deck.png'
     const [ drawnDeck, setDrawnDeck ] = useState([])
     const [ remaining, setRemaining ] = useState()
     const [ cardCompare, setCardCompare ] = useState()
-    const [pair, setPair] = useState([])
+    const [ pair, setPair ] = useState([])
     const [ triple, setTriple ] = useState([])
 
+    // each time the drawn deck state changes, retrieve remaining cards and compare cards
     useEffect(() => {
         axios.get(`https://deckofcardsapi.com/api/deck/${deck_id}`)
             .then(res => setRemaining(res.data.remaining))
             .catch(err => console.error(err))
-    }, [drawnDeck])
-
-    useEffect(() => {
         compareCards()
     }, [drawnDeck])
     
@@ -56,6 +53,13 @@ import deckImg from '../card-deck.png'
         setTriple(triple)
         return pair || triple
     }
+    
+    // const clearCards = (gameInit) => {
+    //     if (gameInit) {
+    //         setDrawnDeck([])
+    //     }
+    // }
+    // clearCards(gameInit)
 
     const drawCards = async () => {
         await axios.get(`https://deckofcardsapi.com/api/deck/${deck_id}/draw/?count=5`)
@@ -110,33 +114,39 @@ import deckImg from '../card-deck.png'
     ))
 
     return (
-        <Box>
-                
-                <Box align={'center'}>
+        <Box>   
+            <Box align={'center'}>
 
-                    <Image 
-                        src={deckImg} 
-                        w={{sm: '45vh'}}
-                    />
-                    <Button 
-                        size={'lg'} 
-                        h={'10%'} 
-                        backgroundColor={'green.500'} 
-                        as='button'
-                        onClick={drawCards}
-                    >
-                        {
-                            gameInit &&
-                            <Heading color='white'>Draw 5</Heading>
-                        }
-                    </Button>
+                <Image 
+                    src={deckImg} 
+                    w={{sm: '45vh'}}
+                />
+                <Button 
+                    size={'lg'} 
+                    h={'10%'} 
+                    backgroundColor={'green.500'} 
+                    as='button'
+                    onClick={drawCards}
+                >
+                    {
+                        gameInit &&
+                        <Heading color='white'>Draw 5</Heading>
+                    }
+                </Button>
 
-                    <Heading mt={4}>Cards remaining: {remaining}</Heading>
-                        <Heading>
-                            {JSON.stringify(cardCompare)}
-                        </Heading>
-                    <Flex direction={{sm: 'column', md: 'row', lg: 'row', xl: 'row'}} align='center'>
+                <Heading mt={4}>Cards remaining: {remaining}</Heading>
+                    {
+                        pair.length !== 0 && triple.length !== 0 ?
+                        <Heading size={'2xl'} color={'green'}>Full House!</Heading>
+                        : <></>
+                    }
+                    <Text>
+                        {JSON.stringify(cardCompare)}
+                    </Text>
+                <Flex direction={{sm: 'column', md: 'row', lg: 'row', xl: 'row'}} align='center'>
+                    {/* displays your 5 cards */}
                         {theRiver}
+                    {/* shows the 'Add' button if you have less than 5 cards and have started the game */}
                         {
                             drawnDeck.length < 5 && drawnDeck.length !== 0 ?
                                 <Button onClick={addCard} colorScheme={'green'}>Add</Button>
@@ -144,14 +154,9 @@ import deckImg from '../card-deck.png'
                                 <>
                                 </>
                         }
-                    </Flex>
-                </Box>
-            
-            {
-                pair.length !== 0 && triple.length !== 0 ?
-                'Full house!'
-                : <></>
-            }
+                </Flex>
+            </Box>
+            {/* Shows that you've won if you have a double and triple */}
         </Box>
     )
 }
