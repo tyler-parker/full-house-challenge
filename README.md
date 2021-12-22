@@ -5,14 +5,17 @@
 * Clone the repo
 * Install packages `npm install`
 * Run `npm start`
+* Make use of the dark mode/light mode with the theme button (top right corner)
 
 ## Current bugs:
 * Card requests are not limited to 2 seconds
-* "Restart Game" is still retrieving a new deck, but when you return to the `CardDeck` component, it still shows the cards drawn from the previous deck and the remaining cards state. Need to clear the `drawnCards` state when starting a new game.
-* Only way to start new deck is to refresh the page
+* "Restart Game" is still retrieving a new deck, but it still shows the cards drawn from the previous deck and the remaining cards state. Need to clear the `drawnCards` state when starting a new game.
+** After you've restarted the game, if you draw five cards again it will draw from the new deck
+* App will break if you reach the end of the deck
 
 ## Backlog:
 * Need to present the `cardCompare` object better. Right now it's just stringified
+* Make the CardDeck component smaller with context.
 * Maybe some animations on the cards to spin when there's a full house
 
 ## Requirements:
