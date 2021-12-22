@@ -34,16 +34,20 @@ function App() {
         <Grid minH="100vh" p={3}>
           <ColorModeSwitcher justifySelf="flex-end" />
           <VStack spacing={8}>
-            <CardDeck remaining={gameInit && deck.remaining} gameInit={gameInit} deck_id={gameInit && deck.deck_id} />
+            <CardDeck 
+              remaining={gameInit && deck.remaining} 
+              gameInit={gameInit} 
+              deck_id={gameInit && deck.deck_id} 
+            />
 
-            {
-              // !gameInit ?
-                <Button onClick={getDeck}>{gameInit ? 'Restart Game' : 'Start Game' }</Button>
-              // : <></>
-            }
+            <Button 
+              onClick={getDeck}
+            >
+              {gameInit ? 'Restart Game' : 'Start Game' }
+            </Button>
           </VStack>
         </Grid>
-      </Box>
+      </Box> 
     </ChakraProvider>
   );
 }
