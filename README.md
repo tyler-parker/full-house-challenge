@@ -8,13 +8,14 @@
 
 ## Current bugs:
 * Card requests are not limited to 2 seconds
-* "Restart Game" button is only toggling components -- need to have button that calls a new deck
+* "Restart Game" is still retrieving a new deck, but when you return to the `CardDeck` component, it still shows the cards drawn from the previous deck and the remaining cards state. Need to clear the `drawnCards` state when starting a new game.
 * Only way to start new deck is to refresh the page
 
 ## Backlog:
 * Need to present the `cardCompare` object better. Right now it's just stringified
 * Maybe some animations on the cards to spin when there's a full house
-* ## Requirements:
+
+## Requirements:
 The goal of this exercise is to create a web page that performs the task below. You are
 free to use a framework (e.g. React/Angular/Vue) if you like. Also, this is open-resource,
 so any resource besides another person is welcome. Once complete, push your code to
