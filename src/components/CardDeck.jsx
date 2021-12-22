@@ -82,6 +82,18 @@ import deckImg from '../card-deck.png'
         .catch(err => console.error(err))
     }
 
+    const borderColorLogic = (card) => {
+        if (pair[0] === card.value) {
+            return 'yellow.500'
+        }
+        if (triple[0] === card.value) {
+            return 'green.500'
+        }
+        else {
+            return 'gray.500'
+        }
+    }
+
     const theRiver = drawnDeck.map(card => (
         <Box 
             justify='center' 
@@ -91,7 +103,7 @@ import deckImg from '../card-deck.png'
             minH='35vh' 
             w={'25vh'} 
             border='solid' 
-            borderColor='gray.500' 
+            borderColor={borderColorLogic(card)} 
             borderRadius='25px'
         >
             <Image src={card.image} />
