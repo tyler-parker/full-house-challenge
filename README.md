@@ -8,7 +8,7 @@
 
 ## Current bugs:
 * Card requests are not limited to 2 seconds
-* "Restart Game" button is only toggling components -- need to have button that calls a new deck
+* "Restart Game" is still retrieving a new deck, but when you return to the `CardDeck` component, it still shows the cards drawn from the previous deck and the remaining cards state. Need to clear the `drawnCards` state when starting a new game.
 * Only way to start new deck is to refresh the page
 
 ## Backlog:
