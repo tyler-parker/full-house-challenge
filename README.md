@@ -1,68 +1,26 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#Full House Coding Challenge
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+##Overview:
+The goal of this exercise is to create a web page that performs the task below. You are
+free to use a framework (e.g. React/Angular/Vue) if you like. Also, this is open-resource,
+so any resource besides another person is welcome. Once complete, push your code to
+a public repository (e.g. GitHub). You have 24 hours to complete this exercise and email
+us a link to the repository.
+##Instructions:
+1. Create one new, shuffled deck of cards (reference https://deckofcardsapi.com/
+for api instructions).
+2. Using the deck_id obtained from step 1, draw 5 cards from the deck and display
+their images on the web page.
+3. Discard any number of cards (up to 5) from your “hand” by removing them from
+the web page, draw from the deck the number of cards you discarded, then
+display the newly drawn card images on the web page alongside the card images
+that were not discarded.
+4. Repeat step 3 until you have a full house (i.e. 3 of one type of card and 2 of
+another. See https://en.wikipedia.org/wiki/List_of_poker_hands#Full_house for
+more information on what constitutes a full house). The goal is to reach a full
+house in the fewest number of draws possible. Keep in mind you must have 5
+card images on the web page after each new draw, you cannot reuse cards you
+previously discarded, and you can only make api requests for new cards once
+every 2 seconds.
+5. Once you have a full house, stop drawing cards and highlight the card images
+that belong to the full house using any kind of css styling you like.
