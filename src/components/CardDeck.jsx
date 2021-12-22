@@ -135,7 +135,7 @@ import deckImg from '../card-deck.png'
                 </Button>
 
                 <Heading mt={4}>Cards remaining: {remaining}</Heading>
-                    {
+                    { /* Shows that you've won if you have a double and triple */
                         pair.length !== 0 && triple.length !== 0 ?
                         <Heading size={'2xl'} color={'green'}>Full House!</Heading>
                         : <></>
@@ -156,7 +156,6 @@ import deckImg from '../card-deck.png'
                         }
                 </Flex>
             </Box>
-            {/* Shows that you've won if you have a double and triple */}
         </Box>
     )
 }

@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios'
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import CardDeck from './components/CardDeck';
 import {
   ChakraProvider,
   Box,
-  Text,
-  Link,
   VStack,
-  Code,
   Grid,
   theme,
   Button
