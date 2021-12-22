@@ -52,10 +52,7 @@ import deckImg from '../card-deck.png'
             }
         }
 
-        console.log(count)
         setCardCompare(count)
-        console.log(pair)
-        console.log(triple)
         setPair(pair)
         setTriple(triple)
         return pair || triple
@@ -71,7 +68,6 @@ import deckImg from '../card-deck.png'
 
     const deleteCard = (cardId) => {
         setDrawnDeck(prevState => prevState.filter(card => card.code !== cardId))
-        console.log(JSON.stringify(cardCompare))
     }
 
     const addCard = async () => {
