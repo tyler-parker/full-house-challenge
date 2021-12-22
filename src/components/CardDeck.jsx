@@ -17,6 +17,8 @@ import deckImg from '../card-deck.png'
     const [ shuffleInit, setShuffleInit ] = useState(false)
     const [ remaining, setRemaining ] = useState()
     const [ cardCompare, setCardCompare ] = useState()
+    const [pair, setPair] = useState([])
+    const [ triple, setTriple ] = useState([])
 
     useEffect(() => {
         axios.get(`https://deckofcardsapi.com/api/deck/${deck_id}`)
@@ -30,7 +32,8 @@ import deckImg from '../card-deck.png'
     
     const compareCards = () => {
         const count = {}
-        const result = []
+        const pair = []
+        const triple = []
 
         drawnDeck.forEach(el => {
             if (count[el.value]) {
@@ -41,15 +44,21 @@ import deckImg from '../card-deck.png'
         })
 
         for (let prop in count) {
-            if (count[prop] >= 2) {
-                result.push(prop)
+            if (count[prop] === 2) {
+                pair.push(prop)
+            }
+            if (count[prop] === 3) {
+                triple.push(prop)
             }
         }
 
         console.log(count)
         setCardCompare(count)
-        console.log(result)
-        return result
+        console.log(pair)
+        console.log(triple)
+        setPair(pair)
+        setTriple(triple)
+        return pair || triple
     }
 
     const drawCards = async () => {
@@ -129,6 +138,11 @@ import deckImg from '../card-deck.png'
                     </Flex>
 
                 </Box>
+            }
+            {
+                pair.length !== 0 && triple.length !== 0 ?
+                'Full house!'
+                : <></>
             }
         </Box>
     )
