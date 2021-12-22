@@ -14,7 +14,8 @@
 ## Backlog:
 * Need to present the `cardCompare` object better. Right now it's just stringified
 * Maybe some animations on the cards to spin when there's a full house
-* ## Requirements:
+
+## Requirements:
 The goal of this exercise is to create a web page that performs the task below. You are
 free to use a framework (e.g. React/Angular/Vue) if you like. Also, this is open-resource,
 so any resource besides another person is welcome. Once complete, push your code to
