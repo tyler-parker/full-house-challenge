@@ -16,7 +16,10 @@ import deckImg from '../card-deck.png'
     const [ drawnDeck, setDrawnDeck ] = useState([])
     const [ shuffleInit, setShuffleInit ] = useState(false)
     const [ remaining, setRemaining ] = useState()
-    
+    const [ cardCompare, setCardCompare ] = useState()
+    const [pair, setPair] = useState([])
+    const [ triple, setTriple ] = useState([])
+
     useEffect(() => {
         axios.get(`https://deckofcardsapi.com/api/deck/${deck_id}`)
             .then(res => setRemaining(res.data.remaining))
@@ -29,7 +32,8 @@ import deckImg from '../card-deck.png'
     
     const compareCards = () => {
         const count = {}
-        const result = []
+        const pair = []
+        const triple = []
 
         drawnDeck.forEach(el => {
             if (count[el.value]) {
@@ -40,13 +44,18 @@ import deckImg from '../card-deck.png'
         })
 
         for (let prop in count) {
-            if (count[prop] >= 2) {
-                result.push(prop)
+            if (count[prop] === 2) {
+                pair.push(prop)
+            }
+            if (count[prop] === 3) {
+                triple.push(prop)
             }
         }
 
-        console.log(count)
-        return result
+        setCardCompare(count)
+        setPair(pair)
+        setTriple(triple)
+        return pair || triple
     }
 
     const drawCards = async () => {
@@ -55,14 +64,10 @@ import deckImg from '../card-deck.png'
             .catch(err => console.error(err))
 
         setShuffleInit(prevState => !prevState)
-        // console.log(drawnDeck);
-        // console.log(shuffleInit)
     }
 
     const deleteCard = (cardId) => {
         setDrawnDeck(prevState => prevState.filter(card => card.code !== cardId))
-        // console.log(drawnDeck)
-        // console.log(drawnDeck.length)
     }
 
     const addCard = async () => {
@@ -71,8 +76,18 @@ import deckImg from '../card-deck.png'
             [...prevState, res.data.cards[0]]
         ))
         .catch(err => console.error(err))
-        // console.log(drawnDeck)
-        // console.log(deck_id)
+    }
+
+    const borderColorLogic = (card) => {
+        if (pair[0] === card.value) {
+            return 'yellow.500'
+        }
+        if (triple[0] === card.value) {
+            return 'green.500'
+        }
+        else {
+            return 'gray.500'
+        }
     }
 
     const theRiver = drawnDeck.map(card => (
@@ -84,7 +99,7 @@ import deckImg from '../card-deck.png'
             minH='35vh' 
             w={'25vh'} 
             border='solid' 
-            borderColor='gray.500' 
+            borderColor={borderColorLogic(card)} 
             borderRadius='25px'
         >
             <Image src={card.image} />
@@ -112,12 +127,16 @@ import deckImg from '../card-deck.png'
                         as='button'
                         onClick={drawCards}
                     >
-                        <Heading color='white'>Shuffle deck</Heading></Button>
+                        <Heading color='white'>Draw 5</Heading>
+                    </Button>
                     <Image 
                         src={deckImg} 
-                    />
+                        />
 
                     <Heading>Cards remaining: {remaining}</Heading>
+                        <Heading>
+                            {JSON.stringify(cardCompare)}
+                        </Heading>
                     <Flex direction={'row'} align='center'>
                         {theRiver}
                         {
@@ -127,6 +146,11 @@ import deckImg from '../card-deck.png'
                     </Flex>
 
                 </Box>
+            }
+            {
+                pair.length !== 0 && triple.length !== 0 ?
+                'Full house!'
+                : <></>
             }
         </Box>
     )
