@@ -17,7 +17,8 @@
 
 ## Backlog:
 * Need to present the `cardCompare` object better. Right now it's just stringified
-* Make the CardDeck component smaller with context.
+* Make the CardDeck component smaller.
+* Switch over services in context file over to the CardDeck and App components.
 * Maybe some animations on the cards to spin when there's a full house
 
 ## Requirements:
