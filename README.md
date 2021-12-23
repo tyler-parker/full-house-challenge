@@ -20,6 +20,7 @@
 * Make the CardDeck component smaller.
 * Switch over services in context file over to the CardDeck and App components.
 * Maybe some animations on the cards to spin when there's a full house
+* Make it more responsive for smaller displays
 
 ## Requirements:
 The goal of this exercise is to create a web page that performs the task below. You are
