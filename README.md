@@ -1,8 +1,3 @@
-# Full House Coding Challenge
-![The gang's all here](https://cdn.cnn.com/cnnnext/dam/assets/190312133445-full-house-super-tease.jpg)
-# Loom Demonstration
- If you aren't able to start the application locally, I have also made a demonstration video on Loom: https://www.loom.com/share/10b3dc6f08ab4dc8b4db7a9f24bdc954
-
 ## Starting the app:
 * Clone the repo
 * Install packages `npm install`
